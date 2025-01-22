@@ -2,6 +2,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t"%>
 <t:template>
 <jsp:attribute name="content">
@@ -13,8 +15,9 @@
 				<td>${f.collection}</td>
 				<td>${f.name}</td>
 				<td>${f.qty}</td>
-				<td>${f.acquireDate}</td>
+				<td><fmt:formatDate value="${f.acquireDate}" pattern="dd/MM/yyyy"/></td>
 				<td>${f.painted}</td>
+				<td>${f.duration}</td>
 				<td>Edit</td>
 			</tr>
 		</c:forEach>

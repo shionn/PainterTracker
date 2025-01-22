@@ -13,4 +13,8 @@ public class Collection {
 	private int qty, paintedQty;
 	private List<Figurine> figurines;
 
+	public double getProgress() {
+		return paintedQty * 100.0 / qty;
+	}
+
 }

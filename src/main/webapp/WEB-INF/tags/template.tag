@@ -18,12 +18,12 @@
 <body>
 	<header>
 		<nav>
-			<a>Painter Tracker</a>
+			<spring:url value="/" var="base"/>
+			<a href="${base}">Painter Tracker</a>
 			<ul>
-				<spring:url value="/" var="base"/>
-				<li><a href="${base}">Collections</a></li>
+				<li><a href="${base}collections">Collections</a></li>
 				<li><a href="${base}history">Historique</a></li>
-				<li><a href="${base}jobs">Session Peinture</a></li>
+				<li><a href="${base}jobs">Tâche de Peinture</a></li>
 				<li><a href="${base}figurines">Figurines</a></li>
 			</ul>
 		</nav>

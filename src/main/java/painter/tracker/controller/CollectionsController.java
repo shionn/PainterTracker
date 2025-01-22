@@ -17,7 +17,7 @@ public class CollectionsController {
 
 	final private SqlSession session;
 
-	@GetMapping("/")
+	@GetMapping({ "/", "/collections" })
 	public ModelAndView home() {
 		List<Collection> collections = session.getMapper(HomeDao.class).list();
 		return new ModelAndView("collections").addObject("collections", collections);
