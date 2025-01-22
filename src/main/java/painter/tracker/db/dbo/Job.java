@@ -1,0 +1,23 @@
+package painter.tracker.db.dbo;
+
+import java.sql.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+public class Job {
+	private int id;
+	private boolean finished;
+	private Date date, end;
+	private int size;
+
+	private List<Figurine> figurines;
+
+	public String getDescription() {
+		return figurines.stream().map(f -> f.getQty() + "x " + f.getName()).collect(Collectors.joining(", "));
+	}
+}
