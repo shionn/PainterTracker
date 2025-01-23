@@ -11,7 +11,7 @@
 
 
 <c:if test="${not empty job}">
-	<h1>Édition</h1>
+	<h1>Édition ${job.id}</h1>
 	<form:form action="${base}/edit">
 		<input type="hidden" name="job" value="${job.id}"/>
 		<label for="date">Date de création</label>

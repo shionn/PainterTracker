@@ -32,7 +32,7 @@
 					<td><c:if test="${f.painted}">DONE</c:if></td>
 					<td><fmt:formatDate value="${f.acquireDate}" pattern="dd/MM/YYYY"/></td>
 					<td><c:if test="${f.painted}"><fmt:formatDate value="${f.paintedDate}" pattern="dd/MM/YYYY"/></c:if></td> 
-					<td>${f.duration}</td>
+					<td>${f.formatedDuration}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

@@ -13,11 +13,19 @@ public class Figurine {
 	private String collection;
 	private int qty;
 	private boolean painted;
-	private String duration;
+	private int duration;
 	private Date acquireDate, paintedDate;
 
 	public String getFormatedDuration() {
-		return duration;
+		if (duration > 0) {
+			int h = duration / 3600;
+			String m = Integer.toString((duration / 60) % 60);
+			if (m.length() == 1) {
+				m = "0" + m;
+			}
+			return h + ":" + m;
+		}
+		return null;
 	}
 
 }
