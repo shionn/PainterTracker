@@ -54,6 +54,9 @@ public class JobController {
 		JobDao dao = session.getMapper(JobDao.class);
 		dao.edit(job, date, finished);
 		session.commit();
+		if (finished) {
+			return "redirect:/jobs";
+		}
 		return "redirect:/jobs/edit/" + job;
 	}
 	@PostMapping("/jobs/add-figurine")

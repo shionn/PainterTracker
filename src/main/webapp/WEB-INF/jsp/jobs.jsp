@@ -26,7 +26,7 @@
 		<label for="figurine">Ajout de Figurine</label>
 		<select name="figurine">
 			<c:forEach items="${figurines}" var="f">
-				<option value="${f.id}">${f.name} x${f.qty} <fmt:formatDate value="${f.acquireDate}" pattern="dd/MM/yyyy"/></option>
+				<option value="${f.id}">${f.name} x${f.qty} <fmt:formatDate value="${f.acquireDate}" pattern="dd/MM/yyyy"/> (${f.collection})</option>
 			</c:forEach>
 		</select>
 		<input type="submit" value="Ajouter"/>
@@ -78,7 +78,7 @@
 		<c:forEach items="${jobs}" var="j">
 			<c:if test="${j.finished}">
 				<tr>
-					<td>${j.description}</td>
+					<td>${j.description} <em>(${j.collection})</em></td>
 					<td><fmt:formatDate value="${j.date}" pattern="dd/MM/yyyy"/></td>
 					<td><fmt:formatDate value="${j.start}" pattern="dd/MM/yyyy"/></td>
 					<td><fmt:formatDate value="${j.end}" pattern="dd/MM/yyyy"/></td>

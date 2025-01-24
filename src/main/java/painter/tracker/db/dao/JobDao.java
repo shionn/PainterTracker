@@ -17,7 +17,7 @@ import painter.tracker.db.dbo.Job;
 
 public interface JobDao {
 
-	@Select("SELECT * FROM paint_job_v ORDER BY date DESC")
+	@Select("SELECT * FROM paint_job_v ORDER BY start DESC")
 	@Results({ @Result(column = "id", property = "id"),
 			@Result(column = "id", property = "figurines", many = @Many(select = "listJobFigurines")) })
 	List<Job> list();

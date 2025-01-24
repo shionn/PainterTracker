@@ -16,7 +16,7 @@ SELECT pj.id as job, IFNULL(SUM(f.qty),0) AS size
 CREATE OR REPLACE VIEW paint_job_v AS
 SELECT pj.id, finished, 
 		date, IFNULL(start,date) AS start, IFNULL(end,date) AS end, 
-		duration, size, duration/size AS average
+		IFNULL(pjd.duration, pj.duration) as duration, size, IFNULL(pjd.duration, pj.duration)/size AS average
 	FROM paint_job AS pj
 	LEFT JOIN paint_job_duration AS pjd ON pjd.job = pj.id
 	LEFT JOIN paint_job_size AS pjs ON pjs.job = pj.id;

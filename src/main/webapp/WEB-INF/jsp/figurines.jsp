@@ -17,7 +17,7 @@
 				<td>${f.qty}</td>
 				<td><fmt:formatDate value="${f.acquireDate}" pattern="dd/MM/yyyy"/></td>
 				<td>${f.painted}</td>
-				<td>${f.duration}</td>
+				<td>${f.formatedDuration}</td>
 				<td>Edit</td>
 			</tr>
 		</c:forEach>

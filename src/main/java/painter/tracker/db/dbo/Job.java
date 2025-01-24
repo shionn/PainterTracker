@@ -18,10 +18,15 @@ public class Job {
 	private List<Figurine> figurines;
 
 	public String getDescription() {
-		String desc = figurines.stream().map(f -> f.getQty() + "x " + f.getName()).collect(Collectors.joining(", "));
+		String desc = figurines.stream().map(f -> f.getQty() + "x " + f.getName())
+				.collect(Collectors.joining(", "));
 		if (desc.length() > 45) {
 			desc = desc.substring(0, 45).concat("...");
 		}
 		return desc;
+	}
+
+	public String getCollection() {
+		return figurines.stream().map(f -> f.getCollection()).findAny().orElse("");
 	}
 }
