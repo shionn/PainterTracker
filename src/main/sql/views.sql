@@ -22,7 +22,7 @@ SELECT pj.id, finished,
 	LEFT JOIN paint_job_size AS pjs ON pjs.job = pj.id;
 	
 CREATE OR REPLACE VIEW figurine_v AS
-SELECT f.id, f.name, f.qty, f.collection, f.description, 
+SELECT f.id, f.name, f.qty, f.game, f.collection, f.description, 
 	IFNULL(pj.finished,FALSE) AS painted, 
 	pj.average*f.qty AS duration,
 	f.acquire_date AS acquire_date, pj.end AS painted_date

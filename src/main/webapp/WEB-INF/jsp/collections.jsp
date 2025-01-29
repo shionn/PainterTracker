@@ -7,10 +7,10 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t"%>
 <t:template>
 <jsp:attribute name="content">
-<table>
+<table class="collections">
 	<thead>
 		<tr>
-			<th colspan="3"></th>
+			<th colspan="3">${totals.painted} / ${totals.qty}</th>
 			<th>Aquisition</th>
 			<th>Peinture</th>
 			<th>Temps de Peinture</th>
@@ -20,7 +20,7 @@
 		<thead>
 			<tr>
 				<th colspan="6">${c.name} ${c.paintedQty} / ${c.qty}
-					<fmt:formatNumber maxFractionDigits="2" value="${c.progress}"/> % 
+					<em><fmt:formatNumber maxFractionDigits="2" value="${c.progress}"/> %</em> 
 				</th>
 			</tr>
 		</thead>
@@ -28,10 +28,10 @@
 			<c:forEach items="${c.figurines}" var="f">
 				<tr>
 					<td>${f.qty}x</td>
+					<td><c:if test="${f.painted}"><i class="fa fa-paint-brush" aria-hidden="true"></i></c:if></td>
 					<td>${f.name}</td>
-					<td><c:if test="${f.painted}">DONE</c:if></td>
-					<td><fmt:formatDate value="${f.acquireDate}" pattern="dd/MM/YYYY"/></td>
-					<td><c:if test="${f.painted}"><fmt:formatDate value="${f.paintedDate}" pattern="dd/MM/YYYY"/></c:if></td> 
+					<td><fmt:formatDate value="${f.acquireDate}" pattern="dd MMM YYYY"/></td>
+					<td><c:if test="${f.painted}"><fmt:formatDate value="${f.paintedDate}" pattern="dd MMM YYYY"/></c:if></td> 
 					<td>${f.formatedDuration}</td>
 				</tr>
 			</c:forEach>

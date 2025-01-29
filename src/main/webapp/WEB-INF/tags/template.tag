@@ -14,6 +14,8 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <title>Painter Tracker</title>
 <link rel="stylesheet" href="<spring:url value="/css/mvp.css"/>" />
+<link rel="stylesheet" href="<spring:url value="/css/font-awesome.css"/>" />
+<link rel="stylesheet" href="<spring:url value="/css/style.css"/>" />
 </head>
 <body>
 	<header>

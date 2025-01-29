@@ -9,7 +9,6 @@
 <jsp:attribute name="content">
 <spring:url value="/jobs" var="base"/>
 
-
 <c:if test="${not empty job}">
 	<h1>Édition ${job.id}</h1>
 	<form:form action="${base}/edit">
@@ -26,7 +25,9 @@
 		<label for="figurine">Ajout de Figurine</label>
 		<select name="figurine">
 			<c:forEach items="${figurines}" var="f">
-				<option value="${f.id}">${f.name} x${f.qty} <fmt:formatDate value="${f.acquireDate}" pattern="dd/MM/yyyy"/> (${f.collection})</option>
+				<c:if test="${f.available(job)}">
+					<option value="${f.id}">${f.name} x${f.qty} <fmt:formatDate value="${f.acquireDate}" pattern="dd/MM/yyyy"/> (${f.collection} - ${f.description})</option>
+				</c:if>
 			</c:forEach>
 		</select>
 		<input type="submit" value="Ajouter"/>

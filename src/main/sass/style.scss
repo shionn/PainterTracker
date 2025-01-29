@@ -1,0 +1,26 @@
+
+table.collections {
+	tr td:nth-child(3) {
+		text-align: left;
+	}
+}
+
+table.figurines {
+	tr td:nth-child(4) {
+		text-align: left;
+	}
+}
+
+form.inline {
+	display: flex;
+	justify-content: flex-start;
+	gap: 10px;
+	border: none;
+	padding: 0;
+	box-shadow: none;
+	
+	input[type="submit"] {
+		padding: 0.4rem 0.8rem;
+		margin: 0 0 1rem 0;
+	}
+}

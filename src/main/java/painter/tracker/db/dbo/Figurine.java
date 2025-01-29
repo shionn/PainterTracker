@@ -2,15 +2,20 @@ package painter.tracker.db.dbo;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Figurine {
 	private int id;
 	private String name;
-	private String collection;
+	private String collection, game;
+	private String description;
 	private int qty;
 	private boolean painted;
 	private int duration;
@@ -28,4 +33,7 @@ public class Figurine {
 		return null;
 	}
 
+	public boolean available(Job job) {
+		return job.getDate().after(acquireDate);
+	}
 }
