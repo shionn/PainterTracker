@@ -19,9 +19,15 @@ public class CollectionsController {
 
 	final private SqlSession session;
 
-	@GetMapping({ "/", "/collections" })
-	public ModelAndView home() {
-		List<Collection> collections = session.getMapper(HomeDao.class).list();
+	@GetMapping({ "/", "/games" })
+	public ModelAndView games() {
+		List<Collection> games = session.getMapper(HomeDao.class).listGames();
+		return new ModelAndView("games").addObject("games", games).addObject("totals", buildTotals(games));
+	}
+
+	@GetMapping({ "/collections" })
+	public ModelAndView collections() {
+		List<Collection> collections = session.getMapper(HomeDao.class).listCollections();
 		return new ModelAndView("collections").addObject("collections", collections).addObject("totals",
 				buildTotals(collections));
 	}

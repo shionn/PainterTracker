@@ -17,9 +17,19 @@ public interface HomeDao {
 			@Result(column = "collection", property = "name"),
 			@Result(column = "collection", property = "figurines", many = @Many(select = "listFigurines"))
 	})
-	public List<Collection> list();
+	public List<Collection> listCollections();
 
 	@Select("SELECT * FROM figurine_v WHERE collection = #{collection} ORDER BY name")
 	public List<Figurine> listFigurines(String collection);
+
+	@Select("SELECT * FROM game_v ORDER BY game")
+	@Results({
+			@Result(column = "game", property = "name"),
+			@Result(column = "game", property = "figurines", many = @Many(select = "listGameFigurines"))
+	})
+	public List<Collection> listGames();
+
+	@Select("SELECT * FROM figurine_v WHERE game = #{game} ORDER BY collection, name")
+	public List<Figurine> listGameFigurines(String game);
 
 }

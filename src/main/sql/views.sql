@@ -36,6 +36,12 @@ SELECT collection, SUM(qty) AS qty, SUM(painted*qty) as painted_qty, SUM(duratio
 	FROM figurine_v 
 	GROUP BY collection;
 
+CREATE OR REPLACE VIEW game_v AS
+SELECT game, SUM(qty) AS qty, SUM(painted*qty) as painted_qty, SUM(duration) as duration
+	FROM figurine_v 
+	GROUP BY game;
+
+	
 CREATE OR REPLACE VIEW month_activity_v AS
 SELECT month
 FROM ( SELECT acquire_month AS month FROM figurine_v) acquire
