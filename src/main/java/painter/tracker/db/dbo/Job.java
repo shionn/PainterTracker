@@ -16,6 +16,7 @@ public class Job {
 	private int size;
 
 	private List<Figurine> figurines;
+	private List<JobSession> sessions;
 
 	public String getDescription() {
 		String desc = figurines.stream().map(f -> f.getQty() + "x " + f.getName())

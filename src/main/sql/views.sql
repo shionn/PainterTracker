@@ -55,22 +55,19 @@ UNION
 	SELECT DISTINCT(EXTRACT(YEAR_MONTH FROM painted_date)) AS month, SUM(qty) AS qty, game
 	FROM figurine_v WHERE painted IS TRUE GROUP BY game, month;
 
-SELECT * 
-FROM month_activity_v AS m, ( SELECT DISTINCT(game) AS game FROM figurine UNION SELECT 'ALL' ) AS g
+CREATE OR REPLACE VIEW month_variation_v AS
+SELECT m.month, g.game, IFNULL(a.qty, 0) AS acquired_qty, IFNULL(p.qty,0) AS painted_qty,  IFNULL(a.qty, 0) - IFNULL(p.qty,0) AS shame_qty 
+FROM (month_activity_v AS m, ( SELECT DISTINCT(game) AS game FROM figurine UNION SELECT 'ALL' ) AS g)
 LEFT JOIN figurine_acquire_per_month_v AS a ON a.month = m.month AND a.game = g.game
 LEFT JOIN figurine_painted_per_month_v AS p ON p.month = m.month AND p.game = g.game
+WHERE a.qty IS NOT NULL OR p.qty IS NOT NULL
 
 
-	
-
-
-SELECT * 
-FROM month_activity_v m
-LEFT 
-
-
-
-
+CREATE OR REPLACE VIEW month_history_v AS
+SELECT m.month, g.game, sum(acquired_qty) AS acquired_total, SUM(painted_qty) AS painted_total, SUM(acquired_qty - painted_qty) AS shame_total
+FROM (month_activity_v AS m, ( SELECT DISTINCT(game) AS game FROM figurine UNION SELECT 'ALL' ) AS g)
+INNER JOIN month_variation_v AS e ON m.month >= e.month AND g.game = e.game
+GROUP BY month, game
 
 
 

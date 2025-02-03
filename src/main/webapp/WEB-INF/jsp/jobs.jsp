@@ -56,8 +56,34 @@
 					<td><fmt:formatDate value="${j.start}" pattern="dd/MM/yyyy"/></td>
 					<td><fmt:formatDate value="${j.end}" pattern="dd/MM/yyyy"/></td>
 					<td>${j.size}</td>
-					<td><a href="${base}/edit/${j.id}">Edit</a></td>
+					<td>
+						<a href="${base}/edit/${j.id}">Edit</a>
+						<a href="${base}/${j.id}/session/create">Start</a>
+					</td>
 				</tr>
+				<c:forEach items="${j.sessions}" var="s">
+					<tr>
+						<c:if test="${not empty s.end}">
+							<td colspan="2">${s.description}</td>
+							<td><fmt:formatDate value="${s.start}" pattern="dd/MM HH:mm"/></td>
+							<td><fmt:formatDate value="${s.end}" pattern="dd/MM HH:mm"/></td>
+							<td colspan="2"> </td>
+						</c:if>
+						<c:if test="${empty s.end}">
+							<td colspan="2">
+								<form:form class="inline" action="${base}/${j.id}/session/${s.id}/edit">
+									<input type="text" name="description" value="${s.description}"/>
+									<input type="submit" value="Edit" />
+								</form:form>
+							</td>
+							<td><fmt:formatDate value="${s.start}" pattern="dd/MM HH:mm"/></td>
+							<td colspan="2"> </td>
+							<td>
+								<a href="${base}/${j.id}/session/${s.id}/end">End</a>
+							</td>
+						</c:if>
+					</tr>
+				</c:forEach>
 			</c:if>
 		</c:forEach>
 	</tobdy>

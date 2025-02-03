@@ -59,6 +59,7 @@ public class JobController {
 		}
 		return "redirect:/jobs/edit/" + job;
 	}
+
 	@PostMapping("/jobs/add-figurine")
 	public String addFigurine(@RequestParam(name = "job") int job, @RequestParam(name = "figurine") int figurine) {
 		JobDao dao = session.getMapper(JobDao.class);
@@ -66,6 +67,27 @@ public class JobController {
 		session.commit();
 		return "redirect:/jobs/edit/" + job;
 	}
-	
+
+	@GetMapping("/jobs/{job}/session/create")
+	public String startSession(@PathVariable(name = "job") int job) {
+		session.getMapper(JobDao.class).createSessionForJob(job, new Date());
+		session.commit();
+		return "redirect:/jobs";
+	}
+
+	@PostMapping("/jobs/{job}/session/{session}/edit")
+	public String startSession(@PathVariable(name = "job") int job, @PathVariable(name = "session") int id,
+			@RequestParam("description") String description) {
+		session.getMapper(JobDao.class).updateJobSessionDescription(id, description);
+		session.commit();
+		return "redirect:/jobs";
+	}
+
+	@GetMapping("/jobs/{job}/session/{session}/end")
+	public String endSession(@PathVariable(name = "job") int job, @PathVariable(name = "session") int id) {
+		session.getMapper(JobDao.class).updateJobSessionEnd(id, new Date());
+		session.commit();
+		return "redirect:/jobs";
+	}
 
 }
