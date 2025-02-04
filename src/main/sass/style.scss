@@ -19,8 +19,18 @@ form.inline {
 	padding: 0;
 	box-shadow: none;
 	
-	input {
+	input, select {
 		padding: 0.1rem 0.8rem;
 		margin: 0 0 0 0;
 	}
 }
+
+table {
+	th[colspan]:only-child {
+		text-align: center;
+	}
+}
+
+//canvas {
+//	background-color: #EEE;
+//}

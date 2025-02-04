@@ -6,7 +6,7 @@
 <%@ attribute name="content" fragment="true"%>
 <%@ attribute name="scripts" fragment="true"%>
 <!DOCTYPE html>
-<html>
+<html color-mode="user">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -38,6 +38,7 @@
 		<hr>
 		<p>Painter Tracker by <a href="mailto:shionn@gmail.com">shionn</a></p>
 	</footer>
+	<script type="text/javascript" src='<spring:url value="/js/scripts.js"/>'></script>
 	<jsp:invoke fragment="scripts" />
 </body>
 </html>

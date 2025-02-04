@@ -32,7 +32,7 @@ SELECT f.id, f.name, f.qty, f.game, f.collection, f.description,
 	LEFT JOIN paint_job_v AS pj ON pj.id = pjc.job;
 
 CREATE OR REPLACE VIEW collection_v AS
-SELECT collection, SUM(qty) AS qty, SUM(painted*qty) as painted_qty, SUM(duration) as duration
+SELECT collection, game, SUM(qty) AS qty, SUM(painted*qty) as painted_qty, SUM(duration) as duration
 	FROM figurine_v 
 	GROUP BY collection;
 
@@ -66,13 +66,16 @@ SELECT m.month, g.game, IFNULL(a.qty, 0) AS acquired_qty, IFNULL(p.qty,0) AS pai
 FROM (month_activity_v AS m, ( SELECT DISTINCT(game) AS game FROM figurine UNION SELECT 'ALL' ) AS g)
 LEFT JOIN figurine_acquire_per_month_v AS a ON a.month = m.month AND a.game = g.game
 LEFT JOIN figurine_painted_per_month_v AS p ON p.month = m.month AND p.game = g.game
-WHERE a.qty IS NOT NULL OR p.qty IS NOT NULL
+-- WHERE a.qty IS NOT NULL OR p.qty IS NOT NULL
 
 
-CREATE OR REPLACE VIEW month_history_v AS
-SELECT m.month, g.game, sum(acquired_qty) AS acquired_total, SUM(painted_qty) AS painted_total, SUM(acquired_qty - painted_qty) AS shame_total
+CREATE OR REPLACE VIEW game_shame_history_v AS
+SELECT m.month, g.game, 
+	v.acquired_qty, v.painted_qty, v.acquired_qty - v.painted_qty AS shame_var,
+	sum(t.acquired_qty) AS acquired_total, SUM(t.painted_qty) AS painted_total, SUM(t.acquired_qty - t.painted_qty) AS shame_total
 FROM (month_activity_v AS m, ( SELECT DISTINCT(game) AS game FROM figurine UNION SELECT 'ALL' ) AS g)
-INNER JOIN month_variation_v AS e ON m.month >= e.month AND g.game = e.game
+INNER JOIN month_variation_v AS t ON m.month >= t.month AND g.game = t.game
+INNER JOIN month_variation_v AS v ON m.month = v.month AND g.game = v.game
 GROUP BY month, game
 
 
