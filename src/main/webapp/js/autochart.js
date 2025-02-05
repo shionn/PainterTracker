@@ -12,6 +12,11 @@ q(function() {
 							display: true,
 							text: result.title
 						}
+					},
+					elements: {
+						point: {
+							pointStyle: false
+						}
 					}
 				}
 			});

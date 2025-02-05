@@ -34,7 +34,7 @@ SELECT f.id, f.name, f.qty, f.game, f.collection, f.description,
 CREATE OR REPLACE VIEW collection_v AS
 SELECT collection, game, SUM(qty) AS qty, SUM(painted*qty) as painted_qty, SUM(duration) as duration
 	FROM figurine_v 
-	GROUP BY collection;
+	GROUP BY collection, game;
 
 CREATE OR REPLACE VIEW game_v AS
 SELECT game, SUM(qty) AS qty, SUM(painted*qty) as painted_qty, SUM(duration) as duration

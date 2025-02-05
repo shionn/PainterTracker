@@ -20,4 +20,6 @@ public class ChartDataSets {
 	private String borderColor = "#000000";
 	@Default
 	private float tension = 0;
+	@Default
+	private boolean stepped = true;
 }

@@ -8,7 +8,7 @@
 <t:template>
 <jsp:attribute name="content">
 
-<canvas data-title="Games" data-captor="<spring:url value="/games/chart/GW"/>"></canvas>
+<canvas data-title="Games" data-captor="<spring:url value="/games/chart"/>"></canvas>
 
 <table class="collections">
 	<thead>
