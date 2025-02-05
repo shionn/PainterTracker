@@ -29,6 +29,10 @@ table {
 	th[colspan]:only-child {
 		text-align: center;
 	}
+	
+	th a {
+		color: lightgrey;
+	}
 }
 
 //canvas {

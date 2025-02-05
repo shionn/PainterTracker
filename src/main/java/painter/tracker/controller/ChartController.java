@@ -76,20 +76,18 @@ public class ChartController {
 		case "AoS S" -> "#AA00AA";
 		case "Battle P" -> "#00FFFF";
 		case "Battle S" -> "#00AAAA";
-		case "Decort P" -> "#FFAA00";
-		case "Decort S" -> "#AA7700";
 		case "Dungeon & Laser P" -> "#FFFF00";
 		case "Dungeon & Laser S" -> "#AAAA00";
+
+		case "Decort P" -> "#FFAA00";
+		case "Decort S" -> "#AA7700";
 		case "Jeu P" -> "#00FFAA";
 		case "Jeu S" -> "#00AA77";
-		case "Repaint P" -> "#AA00FF";
-		case "Repaint S" -> "#7700AA";
-		case "Underworld P" -> "#00FF00";
-		case "Underworld S" -> "#00AA00";
+
+		case "Divers P" -> "#00FF00";
+		case "Divers S" -> "#00AA00";
 		case "Warhammer 40K P" -> "#FF0000";
 		case "Warhammer 40K S" -> "#AA0000";
-		case "Warhammer Quest P" -> "#0000FF";
-		case "Warhammer Quest S" -> "#0000AA";
 
 		default -> "#FF0000";
 		};

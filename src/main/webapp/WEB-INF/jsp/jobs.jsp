@@ -64,7 +64,7 @@
 				<c:forEach items="${j.sessions}" var="s">
 					<tr>
 						<c:if test="${not empty s.end}">
-							<td colspan="2">${s.description}</td>
+							<td colspan="2" style="padding-left: 45px">${s.description}</td>
 							<td><fmt:formatDate value="${s.start}" pattern="dd/MM HH:mm"/></td>
 							<td><fmt:formatDate value="${s.end}" pattern="dd/MM HH:mm"/></td>
 							<td colspan="2"> </td>
