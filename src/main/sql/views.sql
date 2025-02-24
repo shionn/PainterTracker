@@ -78,6 +78,13 @@ INNER JOIN month_variation_v AS t ON m.month >= t.month AND g.game = t.game
 INNER JOIN month_variation_v AS v ON m.month = v.month AND g.game = v.game
 GROUP BY month, game
 
+CREATE OR REPLACE VIEW event_history_v AS
+SELECT 'Acquire' AS type, acquire_date as date, qty, name, game, collection
+FROM figurine_v
+UNION
+SELECT 'Paint' AS type, painted_date as date, qty, name, game, collection
+FROM figurine_v
+WHERE painted IS TRUE;
 
 
 

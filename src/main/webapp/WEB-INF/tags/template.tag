@@ -20,13 +20,12 @@
 <body>
 	<header>
 		<nav>
-			<spring:url value="/" var="base"/>
-			<a href="${base}">Painter Tracker</a>
+			<a href="<spring:url value="/"/>">Painter Tracker</a>
 			<ul>
-				<li><a href="${base}games">Jeux</a></li>
-				<li><a href="${base}history">Historique</a></li>
-				<li><a href="${base}jobs">Tâche de Peinture</a></li>
-				<li><a href="${base}figurines">Figurines</a></li>
+				<li><a href="<spring:url value="/games"/>">Jeux</a></li>
+				<li><a href="<spring:url value="/history"/>">Historique</a></li>
+				<li><a href="<spring:url value="/jobs"/>">Tâche de Peinture</a></li>
+				<li><a href="<spring:url value="/figurines"/>">Figurines</a></li>
 			</ul>
 		</nav>
 	</header>

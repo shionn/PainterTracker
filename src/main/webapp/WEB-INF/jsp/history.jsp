@@ -8,7 +8,7 @@
 <t:template>
 <jsp:attribute name="content">
 
-<table>
+<table class="history shame">
 	<thead>
 		<tr>
 			<td>Mois</td>
@@ -28,6 +28,26 @@
 					<c:if test="${s.paintedQty != 0}">-${s.paintedQty}</c:if>
 				</td>
 			</c:forEach>
+		</tr>
+	</c:forEach>
+</table>
+<table class="history events">
+	<thead>
+		<tr>
+			<td>Date</td>
+			<td>Type</td>
+			<td>Qty</td>
+			<td>Figurine</td>
+			<td>Jeu Collection</td>
+		</tr>
+	</thead>
+	<c:forEach items="${events}" var="e">
+		<tr>
+			<td><fmt:formatDate value="${e.date}" pattern="dd MMMM yyy"/></td>
+			<td>${e.type}</td>
+			<td>${e.figurine.qty}</td>
+			<td>${e.figurine.name}</td>
+			<td>${e.figurine.game} ${e.figurine.collection}</td>
 		</tr>
 	</c:forEach>
 </table>

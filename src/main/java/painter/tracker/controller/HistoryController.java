@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import lombok.RequiredArgsConstructor;
 import painter.tracker.controller.history.History;
 import painter.tracker.db.dao.HistoryDao;
+import painter.tracker.db.dbo.EventHistory;
 import painter.tracker.db.dbo.ShameState;
 
 @Controller
@@ -31,7 +32,10 @@ public class HistoryController {
 				.map(e -> History.builder().month(e.getKey()).shames(e.getValue()).build())
 				.sorted()
 				.toList();
-		return new ModelAndView("history").addObject("histories", histories).addObject("games", games);
+		List<EventHistory> events = session.getMapper(HistoryDao.class).listEventHistory();
+		return new ModelAndView("history").addObject("histories", histories)
+				.addObject("events", events)
+				.addObject("games", games);
 	}
 
 	private String shortGameName(String name) {

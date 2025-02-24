@@ -33,6 +33,18 @@ table {
 	th a {
 		color: lightgrey;
 	}
+	
+	&.history.shame {
+		tbody tr td:nth-child(2n) {
+			border-left: solid 1px black;
+		}
+	}
+	
+	&.history.events {
+		tr td:nth-child(4), tr td:nth-child(5) {
+			text-align: left;
+		}
+	}
 }
 
 //canvas {
