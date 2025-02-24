@@ -43,6 +43,7 @@
 			<th>Date de création</th>
 			<th>Date de début</th>
 			<th>Date de fin</th>
+			<th>Durée</th>
 			<th>Taille</th>
 			<th><a href="${base}/create">Ajouter</a></th>
 		</tr>
@@ -55,6 +56,7 @@
 					<td><fmt:formatDate value="${j.date}" pattern="dd/MM/yyyy"/></td>
 					<td><fmt:formatDate value="${j.start}" pattern="dd/MM/yyyy"/></td>
 					<td><fmt:formatDate value="${j.end}" pattern="dd/MM/yyyy"/></td>
+					<td>${j.formatedDuration}</td>
 					<td>${j.size}</td>
 					<td>
 						<a href="${base}/edit/${j.id}">Edit</a>
@@ -67,6 +69,7 @@
 							<td colspan="2" style="padding-left: 45px">${s.description}</td>
 							<td><fmt:formatDate value="${s.start}" pattern="dd/MM HH:mm"/></td>
 							<td><fmt:formatDate value="${s.end}" pattern="dd/MM HH:mm"/></td>
+							<td>${s.formatedDuration}</td>
 							<td colspan="2"> </td>
 						</c:if>
 						<c:if test="${empty s.end}">
@@ -77,7 +80,7 @@
 								</form:form>
 							</td>
 							<td><fmt:formatDate value="${s.start}" pattern="dd/MM HH:mm"/></td>
-							<td colspan="2"> </td>
+							<td colspan="3"> </td>
 							<td>
 								<a href="${base}/${j.id}/session/${s.id}/end">End</a>
 							</td>
@@ -94,9 +97,9 @@
 	<thead>
 		<tr>
 			<th>Description</th>
-			<th>Date de création</th>
 			<th>Date de début</th>
 			<th>Date de fin</th>
+			<th>Durée</th>
 			<th>Taille</th>
 			<th>#</th>
 		</tr>
@@ -106,9 +109,9 @@
 			<c:if test="${j.finished}">
 				<tr>
 					<td>${j.description} <em>(${j.collection})</em></td>
-					<td><fmt:formatDate value="${j.date}" pattern="dd/MM/yyyy"/></td>
 					<td><fmt:formatDate value="${j.start}" pattern="dd/MM/yyyy"/></td>
 					<td><fmt:formatDate value="${j.end}" pattern="dd/MM/yyyy"/></td>
+					<td>${j.formatedDuration}</td>
 					<td>${j.size}</td>
 					<td><a href="${base}/edit/${j.id}">Edit</a></td>
 				</tr>

@@ -34,15 +34,20 @@ public class FigurinesController implements Serializable {
 	@GetMapping("/figurines")
 	public ModelAndView list() {
 		FigurineDao dao = session.getMapper(FigurineDao.class);
-		return new ModelAndView("figurines").addObject("figurines", applyFilter(dao))
-				.addObject("games", dao.listGames()).addObject("collections", dao.listCollections())
+		return new ModelAndView("figurines")
+				.addObject("figurines", applyFilter(dao))
+				.addObject("games", dao.listGames())
+				.addObject("collections", dao.listCollections())
+				.addObject("sorts", FilterSort.values())
 				.addObject("filter", filter);
 	}
 
 	@GetMapping("/figurines/filter")
-	public String filter(@RequestParam("game") String game, @RequestParam("collection") String collection) {
+	public String filter(@RequestParam("game") String game, @RequestParam("collection") String collection,
+			@RequestParam("sort") FilterSort sort) {
 		filter.setGame(game);
 		filter.setCollection(collection);
+		filter.setSort(sort);
 		return "redirect:/figurines";
 	}
 
@@ -58,8 +63,12 @@ public class FigurinesController implements Serializable {
 	public ModelAndView edit(@PathVariable("id") int id) {
 		FigurineDao dao = session.getMapper(FigurineDao.class);
 		Figurine figurine = dao.read(id);
-		return new ModelAndView("figurines").addObject("figurines", applyFilter(dao)).addObject("figurine", figurine)
-				.addObject("games", dao.listGames()).addObject("collections", dao.listCollections())
+		return new ModelAndView("figurines")
+				.addObject("figurines", applyFilter(dao))
+				.addObject("figurine", figurine)
+				.addObject("games", dao.listGames())
+				.addObject("collections", dao.listCollections())
+				.addObject("sorts", FilterSort.values())
 				.addObject("filter", filter);
 	}
 
@@ -88,7 +97,7 @@ public class FigurinesController implements Serializable {
 	}
 
 	private List<Figurine> applyFilter(FigurineDao dao) {
-		Stream<Figurine> stream = dao.list().stream();
+		Stream<Figurine> stream = dao.list(filter.getSort().getDb()).stream();
 		if (this.filter.getCollection() != null && !filter.getCollection().equalsIgnoreCase("ALL")) {
 			stream = stream.filter(f -> f.getCollection().equalsIgnoreCase(filter.getCollection()));
 		}

@@ -11,8 +11,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class JobSession {
+public class JobSession implements HaveDuration {
 	private int id;
 	private Date start, end;
 	private String description;
+
+	public long getDuration() {
+		return (end.getTime() - start.getTime()) / 1000;
+	}
 }

@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class Job {
+public class Job implements HaveDuration {
 	private int id;
 	private boolean finished;
 	private Date date, start, end;
+	private long duration;
 	private int size;
 
 	private List<Figurine> figurines;

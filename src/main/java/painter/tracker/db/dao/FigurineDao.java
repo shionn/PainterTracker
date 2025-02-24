@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -11,8 +12,8 @@ import painter.tracker.db.dbo.Figurine;
 
 public interface FigurineDao {
 
-	@Select("SELECT * FROM figurine_v ORDER BY game, collection, acquire_date DESC, name")
-	List<Figurine> list();
+	@Select("SELECT * FROM figurine_v ORDER BY ${sort}")
+	List<Figurine> list(@Param("sort") String sort);
 
 	@Select("SELECT * FROM figurine WHERE id = #{id}")
 	Figurine read(int id);

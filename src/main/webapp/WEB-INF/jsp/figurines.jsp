@@ -45,12 +45,17 @@
 			<option value="${c}" <c:if test="${c==filter.collection}">selected="selected"</c:if>>${c}</option>
 		</c:forEach>
 	</select>
+	<select name="sort">
+		<c:forEach items="${sorts}" var="s">
+			<option value="${s}" <c:if test="${s==filter.sort}">selected="selected"</c:if>>${s}</option>
+		</c:forEach>
+	</select>
 	<input type="submit" value="Filtrer"/>
 </form:form>
 <table class="figurines">
 	<thead>
 		<tr>
-			<th>Collection</th>
+			<th>Jeu Collection</th>
 			<th colspan="3">Figurine</th>
 			<th>Aquisition</th>
 			<th><a href="${base}/create">Ajouter</a></th>
