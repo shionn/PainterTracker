@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="<spring:url value="/css/mvp.css"/>" />
 <link rel="stylesheet" href="<spring:url value="/css/font-awesome.css"/>" />
 <link rel="stylesheet" href="<spring:url value="/css/style.css"/>" />
+<link rel="icon" href="<spring:url value="/img/favicon.ico"/>" type="image/x-icon">
+<link rel="shortcut icon" href="<spring:url value="/img/favicon.ico"/>" type="image/x-icon"> </head>
 </head>
 <body>
 	<header>
