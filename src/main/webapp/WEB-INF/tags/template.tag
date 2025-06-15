@@ -22,7 +22,7 @@
 <body>
 	<header>
 		<nav>
-			<a href="<spring:url value="/"/>">Painter Tracker</a>
+			<a href="<spring:url value="/"/>"><img src="<spring:url value="/img/favicon.ico"/>"/></a>
 			<ul>
 				<li><a href="<spring:url value="/games"/>">Jeux</a></li>
 				<li><a href="<spring:url value="/history"/>">Historique</a></li>
