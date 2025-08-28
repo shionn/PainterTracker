@@ -8,10 +8,10 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ChartDataSets {
+public class ChartDataSets<T> {
 
 	private String label;
-	private List<Integer> data;
+	private List<T> data;
 	@Default()
 	private int borderWidth = 1;
 	@Default()

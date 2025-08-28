@@ -53,6 +53,21 @@ nav {
 		width: 300%;
 	}
 }
+
+ul.history-bar {
+	span {
+		display: inline-block;
+	}
+	li > :first-child {
+		width: 150px;
+	}
+	li > :nth-child(2) {
+		border-radius: 8px;
+		height: 16px;
+		border: solid 1px;
+		vertical-align: sub;
+	}
+}
 //canvas {
 //	background-color: #EEE;
 //}

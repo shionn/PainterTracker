@@ -8,7 +8,27 @@
 <t:template>
 <jsp:attribute name="content">
 
-<canvas data-title="Games" data-captor="<spring:url value="/games/chart"/>"></canvas>
+<canvas data-title="Games" data-captor="<spring:url value="/games/chart/history"/>"></canvas>
+
+<ul class="history-bar">
+	<c:forEach items="${games}" var="game">
+		<li>
+			<span>${game.name}</span>
+			<span style="width: ${game.intProgress*3+16}px; background-color: ${game.color}"></span>
+			<span>${game.paintedQty} / ${game.qty}</span>
+			<ul>
+				<c:forEach items="${game.collections}" var="army">
+					<li>
+						<span>&nbsp;&nbsp;${army.name}</span>
+						<span style="width: ${army.intProgress*3+16}px; background-color: ${army.color}"></span>
+						<span>${army.paintedQty} / ${army.qty}</span>
+					</li>
+				</c:forEach>
+			</ul>
+		</li>
+	</c:forEach>
+
+</ul>
 
 <table class="collections">
 	<thead>

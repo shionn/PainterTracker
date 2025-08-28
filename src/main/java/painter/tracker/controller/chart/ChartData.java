@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ChartData {
+public class ChartData<T> {
 	private List<String> labels;
-	private List<ChartDataSets> datasets;
+	private List<ChartDataSets<T>> datasets;
 }

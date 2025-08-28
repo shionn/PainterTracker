@@ -7,5 +7,6 @@ import lombok.Data;
 @Builder
 public class Chart {
 	private String title;
+	private String type;
 	private ChartData data;
 }

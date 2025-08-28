@@ -15,33 +15,36 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import lombok.RequiredArgsConstructor;
 import painter.tracker.controller.chart.Chart;
 import painter.tracker.controller.chart.ChartData;
+import painter.tracker.controller.chart.ChartData.ChartDataBuilder;
 import painter.tracker.controller.chart.ChartDataSets;
+import painter.tracker.controller.chart.ChartDataSets.ChartDataSetsBuilder;
 import painter.tracker.db.dao.HomeDao;
 import painter.tracker.db.dbo.ShameState;
 
 @Controller
 @RequiredArgsConstructor
-public class ChartController {
+public class ChartHistoryController {
 
 	final private SqlSession session;
 
-	@GetMapping(path = "/games/chart", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/games/chart/history", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.OK)
 	public Chart gamesChart() {
 		List<ShameState> shames = session.getMapper(HomeDao.class).listShameHistory();
-		return Chart.builder().title("Games").data(toChartData(shames)).build();
+		return Chart.builder().title("Games").data(toChartData(shames)).type("line").build();
 	}
 
-	private ChartData toChartData(List<ShameState> shames) {
-		return ChartData.builder().labels(toLabels(shames)).datasets(toDataSets(shames)).build();
+	private ChartData<Integer> toChartData(List<ShameState> shames) {
+		ChartDataBuilder<Integer> data = ChartData.builder();
+		return data.labels(toLabels(shames)).datasets(toDataSets(shames)).build();
 	}
 
 	private List<String> toLabels(List<ShameState> shames) {
 		return shames.stream().map(s -> s.getMonth()).distinct().map(i -> (i % 100) + "/" + (i / 100)).toList();
 	}
 
-	private List<ChartDataSets> toDataSets(List<ShameState> shames) {
+	private List<ChartDataSets<Integer>> toDataSets(List<ShameState> shames) {
 //		List<String> ignored = Arrays.asList("Decort", "Jeu", "Repaint");
 		List<String> games = shames
 				.stream()
@@ -50,7 +53,7 @@ public class ChartController {
 				// .filter(g -> !ignored.contains(g))
 				.sorted()
 				.toList();
-		List<ChartDataSets> results = new ArrayList<>();
+		List<ChartDataSets<Integer>> results = new ArrayList<>();
 		games.forEach(game -> {
 			results.add(toDataSet(game, game + " P", shames, ShameState::getPaintedTotal));
 			results.add(toDataSet(game, game + " S", shames, ShameState::getShameTotal));
@@ -58,10 +61,10 @@ public class ChartController {
 		return results;
 	}
 
-	private ChartDataSets toDataSet(String game, String title, List<ShameState> shames,
+	private ChartDataSets<Integer> toDataSet(String game, String title, List<ShameState> shames,
 			Function<ShameState, Integer> submapper) {
-		return ChartDataSets
-				.builder()
+		ChartDataSetsBuilder<Integer> dataset = ChartDataSets.builder();
+		return dataset
 				.label(title)
 				.borderColor(toBorderColor(title))
 				.data(shames.stream().filter(s -> s.getGame().equalsIgnoreCase(game)).map(submapper).toList())
@@ -72,6 +75,7 @@ public class ChartController {
 		return switch (title) {
 		case "ALL P" -> "#FFFFFF";
 		case "ALL S" -> "#AAAAAA";
+
 		case "AoS P" -> "#FF00FF";
 		case "AoS S" -> "#AA00AA";
 		case "Battle P" -> "#00FFFF";
@@ -79,8 +83,8 @@ public class ChartController {
 		case "Dungeon & Laser P" -> "#FFFF00";
 		case "Dungeon & Laser S" -> "#AAAA00";
 
-		case "Decort P" -> "#FFAA00";
-		case "Decort S" -> "#AA7700";
+		case "King of War P" -> "#FFAA00";
+		case "King of War S" -> "#AA7700";
 		case "Jeu P" -> "#00FFAA";
 		case "Jeu S" -> "#00AA77";
 
